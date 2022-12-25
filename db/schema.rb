@@ -12,6 +12,9 @@
 
 ActiveRecord::Schema.define(version: 2022_12_24_105321) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "addresses", force: :cascade do |t|
     t.string "street", null: false
     t.string "town", null: false
@@ -23,7 +26,7 @@ ActiveRecord::Schema.define(version: 2022_12_24_105321) do
   end
 
   create_table "emails", force: :cascade do |t|
-    t.string "email_address"
+    t.string "email_address", null: false
     t.string "comment"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
