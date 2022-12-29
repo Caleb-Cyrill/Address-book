@@ -3,33 +3,38 @@
   <%= link_to root_path, class:"nav-brand" do %>
    <i class="fa-solid fa-address-book"></i> Address Book
   <% end %>
-     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+  <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar">      
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <% if Current.user %>
+    <div class="collapse navbar-collapse" id="navbar">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-        <%= link_to people_path, class:"nav-link" do %>
-          <i class="fa-solid fa-user"></i> People
-        <% end %>
+          <%= link_to people_path, class:"nav-link" do %>
+            <i class="fa-solid fa-user"></i> People
+          <% end %>
         </li>
         <li class="nav-item">
-        <%= link_to addresses_path, class:"nav-link" do %>
-          <i class="fa-solid fa-location-dot"></i> Address
-        <% end %>
+          <%= link_to addresses_path, class:"nav-link" do %>
+            <i class="fa-solid fa-location-dot"></i> Address
+          <% end %>
         </li>
         <li class="nav-item">
-        <%= link_to emails_path, class:"nav-link" do %>
-          <i class="fa-solid fa-envelope"></i> Email
-        <% end %>
+          <%= link_to emails_path, class:"nav-link" do %>
+            <i class="fa-solid fa-envelope"></i> Email
+          <% end %>
         </li>
         <li class="nav-item">
-        <%= link_to phone_numbers_path, class:"nav-link" do %>
-          <i class="fa-solid fa-phone"></i> Number
-        <% end %>
+          <%= link_to phone_numbers_path, class:"nav-link" do %>
+            <i class="fa-solid fa-phone"></i> Number
+          <% end %>
+        </li>
+        <li class="nav-item">
+          <%= button_to 'Logout', logout_path, method: :delete, class:"btn btn-primary" %>
         </li>
       </ul>
     </div>
+    <% end %>
   </div>
 </nav>
 

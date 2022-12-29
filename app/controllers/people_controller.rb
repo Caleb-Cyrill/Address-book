@@ -1,6 +1,6 @@
 class PeopleController < ApplicationController
   before_action :set_person, only: %i[ show edit update destroy ]
-
+  before_action :require_user_logged_in!
   # GET /people or /people.json
   def index
     @people = Person.all
@@ -65,6 +65,6 @@ class PeopleController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def person_params
-      params.require(:person).permit(:salutations, :first_name, :middle_name, :last_name, :ssn, :birth_date, :comment)
+      params.require(:person).permit(:salutations, :first_name, :middle_name, :last_name, :ssn, :birth_date, :comment, :user_id)
     end
 end

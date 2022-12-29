@@ -1,5 +1,6 @@
 class PhoneNumbersController < ApplicationController
   before_action :set_phone_number, only: %i[ show edit update destroy ]
+  before_action :require_user_logged_in!
 
   # GET /phone_numbers or /phone_numbers.json
   def index
@@ -13,6 +14,7 @@ class PhoneNumbersController < ApplicationController
   # GET /phone_numbers/new
   def new
     @phone_number = PhoneNumber.new
+    
   end
 
   # GET /phone_numbers/1/edit

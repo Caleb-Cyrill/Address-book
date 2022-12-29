@@ -1,6 +1,7 @@
 class AddressesController < ApplicationController
   before_action :set_address, only: %i[ show edit update destroy ]
-
+  before_action :require_user_logged_in!
+  
   # GET /addresses or /addresses.json
   def index
     @addresses = Address.all
@@ -13,6 +14,7 @@ class AddressesController < ApplicationController
   # GET /addresses/new
   def new
     @address = Address.new
+    
   end
 
   # GET /addresses/1/edit

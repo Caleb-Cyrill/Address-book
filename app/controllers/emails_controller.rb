@@ -1,6 +1,6 @@
 class EmailsController < ApplicationController
   before_action :set_email, only: %i[ show edit update destroy ]
-
+before_action :require_user_logged_in!
   # GET /emails or /emails.json
   def index
     @emails = Email.all
