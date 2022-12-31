@@ -1,12 +1,13 @@
 <p id="notice"><%= notice %></p>
 
 <h1>Emails</h1>
-<div class=table-responsive>
-<table class="table table-striped table-bordered table-hover">
-  <thead class="table-dark">
+
+<table>
+  <thead>
     <tr>
-      <th>Email address</th>
-      <th>Comment</th>
+      <th>Email</th>
+      <th>Comments</th>
+      <th>Person</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -14,16 +15,21 @@
   <tbody>
     <% @emails.each do |email| %>
       <tr>
-        <td><%= email.email_address %></td>
-        <td><%= email.comment %></td>
-        <td><%= link_to 'Show', email %></td>
-        <td><%= link_to 'Edit', edit_email_path(email) %></td>
-        <td><%= link_to 'Destroy', email, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= email.email %></td>
+        <td><%= email.comments %></td>
+        <td><%= email.person_id %></td>
+        <td><%= link_to 'Show', person_emails_path %></td>
+        <td><%= link_to 'Edit', edit_person_email_path(email.person, email) %></td>
+        <td><%= link_to 'Destroy', person_email_path(email.person, email), method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
-</div>
+
 <br>
 
-<%= link_to 'New Email', new_email_path %>
+<%
+=begin%>
+ <%= link_to 'New Email', new_person_email_path(@person) %> 
+<%
+=end%>

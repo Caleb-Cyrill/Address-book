@@ -13,6 +13,7 @@ class PhoneNumbersController < ApplicationController
 
   # GET /phone_numbers/new
   def new
+    set_current_person
     @phone_number = PhoneNumber.new
     
   end

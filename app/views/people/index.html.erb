@@ -10,7 +10,7 @@
       <th>SSN</th>
       <th>Birth date</th>
       <th>Comment</th>
-      <th colspan="3"></th>
+      <th colspan="6"></th>
     </tr>
   </thead>
 
@@ -27,6 +27,9 @@
         <td><%= link_to 'Show', person %></td>
         <td><%= link_to 'Edit', edit_person_path(person) %></td>
         <td><%= link_to 'Destroy', person, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Add Address',  new_person_address_path(person) %></td>
+        <td><%= link_to 'Add Email', new_person_email_path(person) %></td>
+        <td><%= link_to 'Add Phone Number', new_person_phone_number_path(person) %></td>
       </tr>
     <% end %>
   </tbody>

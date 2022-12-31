@@ -16,7 +16,7 @@
       <tr>
         <td><%= phone_number.phone_number %></td>
         <td><%= phone_number.comment %></td>
-        <td><%= link_to 'Show', phone_number %></td>
+        <td><%= link_to 'Show', person_phone_number_path(phone_number) %></td>
         <td><%= link_to 'Edit', edit_phone_number_path(phone_number) %></td>
         <td><%= link_to 'Destroy', phone_number, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>

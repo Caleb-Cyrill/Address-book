@@ -1,7 +1,6 @@
 class AddressesController < ApplicationController
   before_action :set_address, only: %i[ show edit update destroy ]
   before_action :require_user_logged_in!
-  
   # GET /addresses or /addresses.json
   def index
     @addresses = Address.all
@@ -13,8 +12,8 @@ class AddressesController < ApplicationController
 
   # GET /addresses/new
   def new
+    set_current_person
     @address = Address.new
-    
   end
 
   # GET /addresses/1/edit
@@ -27,7 +26,7 @@ class AddressesController < ApplicationController
 
     respond_to do |format|
       if @address.save
-        format.html { redirect_to address_url(@address), notice: "Address was successfully created." }
+        format.html { redirect_to person_address_path(@address), notice: "Address was successfully created." }
         format.json { render :show, status: :created, location: @address }
       else
         format.html { render :new, status: :unprocessable_entity }

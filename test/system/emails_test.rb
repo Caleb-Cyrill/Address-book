@@ -14,8 +14,9 @@ class EmailsTest < ApplicationSystemTestCase
     visit emails_url
     click_on "New Email"
 
-    fill_in "Comment", with: @email.comment
-    fill_in "Email address", with: @email.email_address
+    fill_in "Comments", with: @email.comments
+    fill_in "Email", with: @email.email
+    fill_in "Person", with: @email.person_id
     click_on "Create Email"
 
     assert_text "Email was successfully created"
@@ -26,8 +27,9 @@ class EmailsTest < ApplicationSystemTestCase
     visit emails_url
     click_on "Edit", match: :first
 
-    fill_in "Comment", with: @email.comment
-    fill_in "Email address", with: @email.email_address
+    fill_in "Comments", with: @email.comments
+    fill_in "Email", with: @email.email
+    fill_in "Person", with: @email.person_id
     click_on "Update Email"
 
     assert_text "Email was successfully updated"

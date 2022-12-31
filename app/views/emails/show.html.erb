@@ -1,14 +1,17 @@
-<p id="notice"><%= notice %></p>
-
 <p>
-  <strong>Email address:</strong>
-  <%= @email.email_address %>
+  <strong>Email:</strong>
+  <%= @email.email %>
 </p>
 
 <p>
-  <strong>Comment:</strong>
-  <%= @email.comment %>
+  <strong>Comments:</strong>
+  <%= @email.comments %>
 </p>
 
-<%= link_to 'Edit', edit_email_path(@email) %> |
-<%= link_to 'Back', emails_path %>
+<p>
+  <strong>Person:</strong>
+  <%= @email.person_id %>
+</p>
+
+<%= link_to 'Edit',  edit_person_email_path(@email) %> |
+<%= link_to 'Back', person_emails_path(@person) %>

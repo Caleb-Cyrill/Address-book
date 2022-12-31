@@ -1,6 +1,6 @@
 class EmailsController < ApplicationController
   before_action :set_email, only: %i[ show edit update destroy ]
-before_action :require_user_logged_in!
+
   # GET /emails or /emails.json
   def index
     @emails = Email.all
@@ -12,7 +12,8 @@ before_action :require_user_logged_in!
 
   # GET /emails/new
   def new
-    @email = Email.new
+    set_current_person
+    @email = @person.emails.new
   end
 
   # GET /emails/1/edit
@@ -21,11 +22,12 @@ before_action :require_user_logged_in!
 
   # POST /emails or /emails.json
   def create
-    @email = Email.new(email_params)
+    @person = Person.find_by(params[:id])
+    @email = @person.emails.new(email_params)
 
     respond_to do |format|
       if @email.save
-        format.html { redirect_to email_url(@email), notice: "Email was successfully created." }
+        format.html { redirect_to person_emails_path(@email), notice: "Email was successfully created." }
         format.json { render :show, status: :created, location: @email }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -52,7 +54,7 @@ before_action :require_user_logged_in!
     @email.destroy
 
     respond_to do |format|
-      format.html { redirect_to emails_url, notice: "Email was successfully destroyed." }
+      format.html { redirect_to people_path, notice: "Email was successfully destroyed." }
       format.json { head :no_content }
     end
   end
@@ -63,8 +65,12 @@ before_action :require_user_logged_in!
       @email = Email.find(params[:id])
     end
 
+    def set_person
+      @person = Person.find_by(id: params[:person_id])
+    end
+
     # Only allow a list of trusted parameters through.
     def email_params
-      params.require(:email).permit(:email_address, :comment)
+      params.require(:email).permit(:email, :comments, :person_id)
     end
 end

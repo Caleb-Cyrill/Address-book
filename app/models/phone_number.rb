@@ -1,3 +1,3 @@
 class PhoneNumber < ApplicationRecord
-    belongs_to :people, optional: true
+    belongs_to :person, optional: true
 end
