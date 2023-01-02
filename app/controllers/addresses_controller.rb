@@ -22,6 +22,7 @@ class AddressesController < ApplicationController
 
   # POST /addresses or /addresses.json
   def create
+    @person = Person.find_by(params[:id])
     @address = Address.new(address_params)
 
     respond_to do |format|

@@ -1,13 +1,18 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Phone number:</strong>
-  <%= @phone_number.phone_number %>
+  <strong>Phonenumber:</strong>
+  <%= @phone_number.phonenumber %>
 </p>
 
 <p>
-  <strong>Comment:</strong>
-  <%= @phone_number.comment %>
+  <strong>Comments:</strong>
+  <%= @phone_number.comments %>
+</p>
+
+<p>
+  <strong>Person:</strong>
+  <%= @phone_number.person_id %>
 </p>
 
 <%= link_to 'Edit', edit_phone_number_path(@phone_number) %> |

@@ -5,10 +5,6 @@ class ApplicationController < ActionController::Base
       # finds user with session data and stores it if present
       Current.user = User.find_by(id: session[:user_id]) if session[:user_id]
     end
-
-    def set_current_person
-      @person = Person.find_by(id: params[:person_id])
-    end
     
     def require_user_logged_in!
       # allows only logged in user

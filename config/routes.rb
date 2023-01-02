@@ -1,13 +1,11 @@
 Rails.application.routes.draw do
  
-  # resources :emails
-  # resources :phone_numbers, path: :phone
-  # resources :addresses, path: :address
+  
   resources :people do 
     resources :emails
     resources :addresses
     resources :phone_numbers
-  end
+    end
     
   root 'home#index'
   get 'sign_up', to: 'registrations#new'

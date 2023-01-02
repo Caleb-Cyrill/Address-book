@@ -1,12 +1,13 @@
 <p id="notice"><%= notice %></p>
 
 <h1>Phone Numbers</h1>
-<div class=table-responsive>
-<table class="table table-striped table-bordered table-hover">
-  <thead class="table-dark">
+
+<table>
+  <thead>
     <tr>
-      <th>Phone number</th>
-      <th>Comment</th>
+      <th>Phonenumber</th>
+      <th>Comments</th>
+      <th>Person</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -14,16 +15,17 @@
   <tbody>
     <% @phone_numbers.each do |phone_number| %>
       <tr>
-        <td><%= phone_number.phone_number %></td>
-        <td><%= phone_number.comment %></td>
-        <td><%= link_to 'Show', person_phone_number_path(phone_number) %></td>
+        <td><%= phone_number.phonenumber %></td>
+        <td><%= phone_number.comments %></td>
+        <td><%= phone_number.person_id %></td>
+        <td><%= link_to 'Show', phone_number %></td>
         <td><%= link_to 'Edit', edit_phone_number_path(phone_number) %></td>
         <td><%= link_to 'Destroy', phone_number, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
-</div>
+
 <br>
 
 <%= link_to 'New Phone Number', new_phone_number_path %>

@@ -1,4 +1,4 @@
-<%= form_with(model: email, url: person_emails_path) do |form| %>
+<%= form_with(model: [@person, email]) do |form| %>
   <% if email.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(email.errors.count, "error") %> prohibited this email from being saved:</h2>
@@ -11,17 +11,18 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :email %>
-    <%= form.text_field :email %>
+  <div class="field form-group">
+    </br>
+    <%= form.text_field :email, class:"form-control", placeholder:"Email" %>
   </div>
 
   <div class="field">
-    <%= form.label :comments %>
-    <%= form.text_field :comments %>
+  </br>
+    <%= form.text_area :comments, class:"form-control", placeholder:"comments" %>
   </div>
 
   <div class="actions">
-    <%= form.submit %>
+  </br>
+    <%= form.submit class:"btn btn-secondary" %>
   </div>
 <% end %>

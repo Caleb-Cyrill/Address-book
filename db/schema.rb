@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_12_31_041741) do
+ActiveRecord::Schema.define(version: 2023_01_02_110829) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,8 +23,8 @@ ActiveRecord::Schema.define(version: 2022_12_31_041741) do
     t.string "country"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "people_id"
-    t.index ["people_id"], name: "index_addresses_on_people_id"
+    t.integer "person_id"
+    t.index ["person_id"], name: "index_addresses_on_person_id"
   end
 
   create_table "emails", force: :cascade do |t|
@@ -51,12 +51,12 @@ ActiveRecord::Schema.define(version: 2022_12_31_041741) do
   end
 
   create_table "phone_numbers", force: :cascade do |t|
-    t.integer "phone_number", null: false
-    t.string "comment"
+    t.integer "phonenumber", null: false
+    t.string "comments"
+    t.bigint "person_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "people_id"
-    t.index ["people_id"], name: "index_phone_numbers_on_people_id"
+    t.index ["person_id"], name: "index_phone_numbers_on_person_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -66,4 +66,5 @@ ActiveRecord::Schema.define(version: 2022_12_31_041741) do
     t.string "password_digest"
   end
 
+  add_foreign_key "phone_numbers", "people"
 end

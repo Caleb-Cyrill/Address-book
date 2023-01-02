@@ -14,8 +14,9 @@ class PhoneNumbersTest < ApplicationSystemTestCase
     visit phone_numbers_url
     click_on "New Phone Number"
 
-    fill_in "Comment", with: @phone_number.comment
-    fill_in "Phone number", with: @phone_number.phone_number
+    fill_in "Comments", with: @phone_number.comments
+    fill_in "Person", with: @phone_number.person_id
+    fill_in "Phonenumber", with: @phone_number.phonenumber
     click_on "Create Phone number"
 
     assert_text "Phone number was successfully created"
@@ -26,8 +27,9 @@ class PhoneNumbersTest < ApplicationSystemTestCase
     visit phone_numbers_url
     click_on "Edit", match: :first
 
-    fill_in "Comment", with: @phone_number.comment
-    fill_in "Phone number", with: @phone_number.phone_number
+    fill_in "Comments", with: @phone_number.comments
+    fill_in "Person", with: @phone_number.person_id
+    fill_in "Phonenumber", with: @phone_number.phonenumber
     click_on "Update Phone number"
 
     assert_text "Phone number was successfully updated"

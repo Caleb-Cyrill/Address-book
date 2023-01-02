@@ -1,9 +1,11 @@
 class EmailsController < ApplicationController
+  before_action :set_person
   before_action :set_email, only: %i[ show edit update destroy ]
+  before_action :require_user_logged_in!
 
   # GET /emails or /emails.json
   def index
-    @emails = Email.all
+    @emails = @person.emails
   end
 
   # GET /emails/1 or /emails/1.json
@@ -12,25 +14,23 @@ class EmailsController < ApplicationController
 
   # GET /emails/new
   def new
-    set_current_person
-    @email = @person.emails.new
+    @email = @person.emails.build
   end
-
+  
   # GET /emails/1/edit
   def edit
   end
 
   # POST /emails or /emails.json
   def create
-    @person = Person.find_by(params[:id])
-    @email = @person.emails.new(email_params)
+    @email = @person.emails.build(email_params)
 
     respond_to do |format|
       if @email.save
-        format.html { redirect_to person_emails_path(@email), notice: "Email was successfully created." }
+        format.html { redirect_to [@person, @email], notice: "Email was successfully created." }
         format.json { render :show, status: :created, location: @email }
       else
-        format.html { render :new, status: :unprocessable_entity }
+        format.html { redirect_to new_person_email_path([@person, @email]), status: :unprocessable_entity, alert: "Invalid email format" }
         format.json { render json: @email.errors, status: :unprocessable_entity }
       end
     end
@@ -40,10 +40,10 @@ class EmailsController < ApplicationController
   def update
     respond_to do |format|
       if @email.update(email_params)
-        format.html { redirect_to email_url(@email), notice: "Email was successfully updated." }
+        format.html { redirect_to [@person, @email], notice: "Email was successfully updated." }
         format.json { render :show, status: :ok, location: @email }
       else
-        format.html { render :edit, status: :unprocessable_entity }
+        format.html { redirect_to person_email_path, status: :unprocessable_entity, alert: "Invalid email format" }
         format.json { render json: @email.errors, status: :unprocessable_entity }
       end
     end
@@ -54,7 +54,7 @@ class EmailsController < ApplicationController
     @email.destroy
 
     respond_to do |format|
-      format.html { redirect_to people_path, notice: "Email was successfully destroyed." }
+      format.html { redirect_to [@person, :emails], notice: "Email was successfully destroyed." }
       format.json { head :no_content }
     end
   end
@@ -62,15 +62,14 @@ class EmailsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_email
-      @email = Email.find(params[:id])
+      @email = @person.emails.find(params[:id])
     end
 
     def set_person
-      @person = Person.find_by(id: params[:person_id])
+      @person = Person.find(params[:person_id])
     end
-
     # Only allow a list of trusted parameters through.
     def email_params
-      params.require(:email).permit(:email, :comments, :person_id)
+      params.require(:email).permit(:email, :comments)
     end
 end

@@ -1,9 +1,7 @@
-<p id="notice"><%= notice %></p>
-
 <h1>Emails</h1>
 
-<table>
-  <thead>
+<div class="table-responsive"><table class="table table-striped table-bordered table-hover">
+  <thead class="table-dark">
     <tr>
       <th>Email</th>
       <th>Comments</th>
@@ -18,18 +16,15 @@
         <td><%= email.email %></td>
         <td><%= email.comments %></td>
         <td><%= email.person_id %></td>
-        <td><%= link_to 'Show', person_emails_path %></td>
-        <td><%= link_to 'Edit', edit_person_email_path(email.person, email) %></td>
-        <td><%= link_to 'Destroy', person_email_path(email.person, email), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Show', person_email_path(@person, email) %></td>
+        <td><%= link_to 'Edit', edit_person_email_path(@person, email) %></td>
+        <td><%= link_to 'Destroy', person_email_path(@person, email), method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
 <br>
+<%= link_to 'New Email', new_person_email_path %> |
+<%= link_to 'Back to People', people_path %>
 
-<%
-=begin%>
- <%= link_to 'New Email', new_person_email_path(@person) %> 
-<%
-=end%>
