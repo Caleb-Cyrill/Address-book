@@ -1,31 +1,26 @@
-<p id="notice"><%= notice %></p>
-
 <h1>Phone Numbers</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Phonenumber</th>
-      <th>Comments</th>
-      <th>Person</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @phone_numbers.each do |phone_number| %>
+<div class=table-responsive>
+  <table class="table table-striped table-bordered table-hover">
+    <thead class="table-dark">
       <tr>
-        <td><%= phone_number.phonenumber %></td>
-        <td><%= phone_number.comments %></td>
-        <td><%= phone_number.person_id %></td>
-        <td><%= link_to 'Show', phone_number %></td>
-        <td><%= link_to 'Edit', edit_phone_number_path(phone_number) %></td>
-        <td><%= link_to 'Destroy', phone_number, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <th>Phonenumber</th>
+        <th>Comments</th>
+        <th colspan="3"></th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+      <% @phone_numbers.each do |phone_number| %>
+      <tr>
+        <td><%= phone_number.phone_number %></td>
+        <td><%= phone_number.comments %></td>
+        <td><%= link_to 'Show', person_phone_number_path(@person, phone_number) %></td>
+        <td><%= link_to 'Edit', edit_person_phone_number_path(@person, phone_number) %></td>
+        <td><%= link_to 'Destroy', person_phone_number_path(@person, phone_number), method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-outline-danger" %></td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
 
-<br>
-
-<%= link_to 'New Phone Number', new_phone_number_path %>
+<%= link_to 'New Phone Number', new_person_phone_number_path, class:"btn btn-primary" %>
+<%= link_to 'Back To People', people_path, class:"btn btn-primary" %>

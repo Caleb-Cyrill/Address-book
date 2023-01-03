@@ -8,6 +8,11 @@ class PeopleController < ApplicationController
 
   # GET /people/1 or /people/1.json
   def show
+    @people = Person.find(params[:id])
+    @address = @people.addresses
+    @email = @people.emails
+    @phone_number = @people.phone_numbers
+    
   end
 
   # GET /people/new

@@ -1,9 +1,10 @@
 class PhoneNumbersController < ApplicationController
+  before_action :set_person
   before_action :set_phone_number, only: %i[ show edit update destroy ]
 
   # GET /phone_numbers or /phone_numbers.json
   def index
-    @phone_numbers = PhoneNumber.all
+    @phone_numbers = @person.phone_numbers
   end
 
   # GET /phone_numbers/1 or /phone_numbers/1.json
@@ -12,7 +13,7 @@ class PhoneNumbersController < ApplicationController
 
   # GET /phone_numbers/new
   def new
-    @phone_number = PhoneNumber.new
+    @phone_number = @person.phone_numbers.build
   end
 
   # GET /phone_numbers/1/edit
@@ -21,14 +22,14 @@ class PhoneNumbersController < ApplicationController
 
   # POST /phone_numbers or /phone_numbers.json
   def create
-    @phone_number = PhoneNumber.new(phone_number_params)
+    @phone_number = @person.phone_numbers.build(phone_number_params)
 
     respond_to do |format|
       if @phone_number.save
-        format.html { redirect_to phone_number_url(@phone_number), notice: "Phone number was successfully created." }
+        format.html { redirect_to [@person, @phone_number], notice: "Phone number was successfully created." }
         format.json { render :show, status: :created, location: @phone_number }
       else
-        format.html { render :new, status: :unprocessable_entity }
+        format.html { redirect_to new_person_phone_number_path([@person, @phone_number]), status: :unprocessable_entity, alert:"Invalid number format" }
         format.json { render json: @phone_number.errors, status: :unprocessable_entity }
       end
     end
@@ -38,10 +39,10 @@ class PhoneNumbersController < ApplicationController
   def update
     respond_to do |format|
       if @phone_number.update(phone_number_params)
-        format.html { redirect_to phone_number_url(@phone_number), notice: "Phone number was successfully updated." }
+        format.html { redirect_to [@person, @phone_number], notice: "Phone number was successfully updated." }
         format.json { render :show, status: :ok, location: @phone_number }
       else
-        format.html { render :edit, status: :unprocessable_entity }
+        format.html { redirect_to person_phone_number_path, status: :unprocessable_entity, alert:"Invalid number format" }
         format.json { render json: @phone_number.errors, status: :unprocessable_entity }
       end
     end
@@ -52,7 +53,7 @@ class PhoneNumbersController < ApplicationController
     @phone_number.destroy
 
     respond_to do |format|
-      format.html { redirect_to phone_numbers_url, notice: "Phone number was successfully destroyed." }
+      format.html { redirect_to [@person, :phone_numbers], notice: "Phone number was successfully destroyed." }
       format.json { head :no_content }
     end
   end
@@ -63,8 +64,12 @@ class PhoneNumbersController < ApplicationController
       @phone_number = PhoneNumber.find(params[:id])
     end
 
+    def set_person
+      @person = Person.find(params[:person_id])
+    end
+    
     # Only allow a list of trusted parameters through.
     def phone_number_params
-      params.require(:phone_number).permit(:phonenumber, :comments, :person_id)
+      params.require(:phone_number).permit(:phone_number, :comments)
     end
 end

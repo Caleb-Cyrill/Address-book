@@ -1,18 +1,22 @@
-<p>
-  <strong>Email:</strong>
-  <%= @email.email %>
-</p>
+</br>
+<div class=table-responsive>
+  <table class="table table-striped table-bordered table-hover">
+    <thead class="table-dark">
+      <tr>
+        <th>Email</th>
+        <th>Comment</th>
+      </tr>
+    </thead>
 
-<p>
-  <strong>Comments:</strong>
-  <%= @email.comments %>
-</p>
+    <tbody>
+      <tr>
+        <td><%= @email.email %></td>
+        <td><%= @email.comments %></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
 
-<p>
-  <strong>Person:</strong>
-  <%= @email.person_id %>
-</p>
-
-<%= link_to 'Edit',  edit_person_email_path([@person, @email]) %> |
-<%= link_to 'Back to People', people_path %> |
-<%= link_to 'Back to Emails', person_emails_path %> 
+<%= link_to 'Edit',  edit_person_email_path([@person, @email]), class:"btn btn-primary" %> 
+<%= link_to 'Back to People', people_path, class:"btn btn-primary" %> 
+<%= link_to 'Back to Emails', person_emails_path, class:"btn btn-primary" %> 

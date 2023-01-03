@@ -1,19 +1,23 @@
-<p id="notice"><%= notice %></p>
+</br>
+<div class=table-responsive>
+  <table class="table table-striped table-bordered table-hover">
+    <thead class="table-dark">
+      <tr>
+        <th>Phone Number</th>
+        <th>Comment</th>
+      </tr>
+    </thead>
 
-<p>
-  <strong>Phonenumber:</strong>
-  <%= @phone_number.phonenumber %>
-</p>
+    <tbody>
+      <tr>
+        <td><%= @phone_number.phone_number %></td>
+        <td><%= @phone_number.comments %></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
 
-<p>
-  <strong>Comments:</strong>
-  <%= @phone_number.comments %>
-</p>
 
-<p>
-  <strong>Person:</strong>
-  <%= @phone_number.person_id %>
-</p>
-
-<%= link_to 'Edit', edit_phone_number_path(@phone_number) %> |
-<%= link_to 'Back', phone_numbers_path %>
+<%= link_to 'Edit', edit_person_phone_number_path([@person, @phone_number]), class:"btn btn-primary" %> 
+<%= link_to 'Back to People', people_path, class:"btn btn-primary" %> 
+<%= link_to 'Back to Phone Numbers', person_phone_numbers_path, class:"btn btn-primary"%> 

@@ -1,9 +1,10 @@
 class AddressesController < ApplicationController
+  before_action :set_person
   before_action :set_address, only: %i[ show edit update destroy ]
   before_action :require_user_logged_in!
   # GET /addresses or /addresses.json
   def index
-    @addresses = Address.all
+    @addresses = @person.addresses
   end
 
   # GET /addresses/1 or /addresses/1.json
@@ -12,8 +13,8 @@ class AddressesController < ApplicationController
 
   # GET /addresses/new
   def new
-    set_current_person
-    @address = Address.new
+    
+    @address = @person.addresses.build
   end
 
   # GET /addresses/1/edit
@@ -22,15 +23,15 @@ class AddressesController < ApplicationController
 
   # POST /addresses or /addresses.json
   def create
-    @person = Person.find_by(params[:id])
-    @address = Address.new(address_params)
+    
+    @address = @person.addresses.build(address_params)
 
     respond_to do |format|
       if @address.save
-        format.html { redirect_to person_address_path(@address), notice: "Address was successfully created." }
+        format.html { redirect_to [@person, @address], notice: "Address was successfully created." }
         format.json { render :show, status: :created, location: @address }
       else
-        format.html { render :new, status: :unprocessable_entity }
+        format.html { redirect_to new_person_address_path, status: :unprocessable_entity, alert:"Invalid address" }
         format.json { render json: @address.errors, status: :unprocessable_entity }
       end
     end
@@ -40,10 +41,10 @@ class AddressesController < ApplicationController
   def update
     respond_to do |format|
       if @address.update(address_params)
-        format.html { redirect_to address_url(@address), notice: "Address was successfully updated." }
+        format.html { redirect_to [@person, @address], notice: "Address was successfully updated." }
         format.json { render :show, status: :ok, location: @address }
       else
-        format.html { render :edit, status: :unprocessable_entity }
+        format.html { redirect_to person_address_path, status: :unprocessable_entity, alert:"Invalid address" }
         format.json { render json: @address.errors, status: :unprocessable_entity }
       end
     end
@@ -54,7 +55,7 @@ class AddressesController < ApplicationController
     @address.destroy
 
     respond_to do |format|
-      format.html { redirect_to addresses_url, notice: "Address was successfully destroyed." }
+      format.html { redirect_to [@person, :addresses], notice: "Address was successfully destroyed." }
       format.json { head :no_content }
     end
   end
@@ -65,6 +66,10 @@ class AddressesController < ApplicationController
       @address = Address.find(params[:id])
     end
 
+    def set_person
+      @person = Person.find(params[:person_id])
+    end
+    
     # Only allow a list of trusted parameters through.
     def address_params
       params.require(:address).permit(:street, :town, :zip_code, :state, :country)
