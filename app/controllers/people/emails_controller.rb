@@ -1,4 +1,4 @@
-class EmailsController < ApplicationController
+class People::EmailsController < ApplicationController
   before_action :set_person
   before_action :set_email, only: %i[ show edit update destroy ]
   before_action :require_user_logged_in!
@@ -26,7 +26,7 @@ class EmailsController < ApplicationController
 
     respond_to do |format|
       if @email.save
-        format.html { redirect_to [@person, @email], notice: "Email was successfully created." }
+        format.html { redirect_to @person, notice: "Email was successfully created." }
         format.json { render :show, status: :created, location: @email }
       else
         format.html { redirect_to new_person_email_path([@person, @email]), status: :unprocessable_entity, alert: "Invalid email format" }
@@ -39,8 +39,8 @@ class EmailsController < ApplicationController
   def update
     respond_to do |format|
       if @email.update(email_params)
-        format.html { redirect_to [@person, @email], notice: "Email was successfully updated." }
-        format.json { render :show, status: :ok, location: @email }
+        format.html { redirect_to @person, notice: "Email was successfully updated." }
+        format.json { render :show, status: :ok, location: @person }
       else
         format.html { redirect_to person_email_path, status: :unprocessable_entity, alert: "Invalid email format" }
         format.json { render json: @email.errors, status: :unprocessable_entity }
@@ -53,7 +53,7 @@ class EmailsController < ApplicationController
     @email.destroy
 
     respond_to do |format|
-      format.html { redirect_to [@person, :emails], notice: "Email was successfully destroyed." }
+      format.html { redirect_to @person, notice: "Email was successfully destroyed." }
       format.json { head :no_content }
     end
   end
