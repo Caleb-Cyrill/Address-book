@@ -2,17 +2,30 @@
   "name": "address_book_caleb_cyrill",
   "private": true,
   "dependencies": {
+    "@babel/core": "^7.20.12",
+    "@babel/plugin-transform-runtime": "^7.19.6",
+    "@babel/preset-env": "^7.20.2",
     "@popperjs/core": "^2.11.6",
     "@rails/actioncable": "^6.0.0",
     "@rails/activestorage": "^6.0.0",
     "@rails/ujs": "^6.0.0",
-    "@rails/webpacker": "^5.4.3",
+    "babel-loader": "^9.1.2",
+    "babel-plugin-macros": "^3.1.0",
     "bootstrap": "^5.2.3",
-    "turbolinks": "^5.2.0"
+    "turbolinks": "^5.2.0",
+    "webpack": "^5.75.0",
+    "webpack-cli": "^5.0.1"
   },
   "version": "0.1.0",
   "devDependencies": {
-    "@webpack-cli/serve": "^2.0.1",
-    "webpack-dev-server": "^4.11.1"
+    "@webpack-cli/serve": "^2.0.1"
+  },
+  "scripts": {
+    "build": "webpack --config ./config/webpack/webpack.config.js"
+  },
+  "babel": {
+    "presets": [
+      "@babel/preset-env"
+    ]
   }
 }
