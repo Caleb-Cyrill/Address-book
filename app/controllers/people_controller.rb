@@ -31,7 +31,9 @@ class PeopleController < ApplicationController
       if @person.save
         format.html { redirect_to person_url(@person), notice: "Person was successfully created." }
         format.json { render :show, status: :created, location: @person }
+        format.js
       else
+        format.js
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @person.errors, status: :unprocessable_entity }
       end
@@ -54,7 +56,6 @@ class PeopleController < ApplicationController
   # DELETE /people/1 or /people/1.json
   def destroy
     @person.destroy
-
     respond_to do |format|
       format.html { redirect_to people_url, notice: "Person was successfully destroyed." }
       format.json { head :no_content }

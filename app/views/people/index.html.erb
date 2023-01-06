@@ -14,35 +14,29 @@
       </tr>
     </thead>
 
-  <tbody>
+  <tbody id="peopleTable">
     <% @people.each do |person| %>
-      <tr>
-        <td><%= person.salutations %></td>
-        <td><%= person.first_name %></td>
-        <td><%= person.middle_name %></td>
-        <td><%= person.last_name %></td>
-        <td><%= person.ssn %></td>
-        <td><%= person.birth_date %></td>
-        <td><%= person.comment %></td>
-        <td>
-          <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Actions
-            </button>
-            <ul class="dropdown-menu">
-              <li><%= link_to 'Show', person, class:"text-decoration-none"%></li>
-              <li><%= link_to 'Edit', edit_person_path(person), class:"text-decoration-none" %></li>
-              <li><%= link_to 'Destroy', person, method: :delete, data: { confirm: 'Are you sure?' }, class:"text-decoration-none text-danger" %></li>
-            </ul>
-          </div>
-        </td>
-      </tr>
+      <%= render 'person_row', person: person %>
     <% end %>
   </tbody>
 </table>
       <tr>
-        <td><%= link_to 'New Person', new_person_path, class:"btn btn-primary" %></td>
+        <td><%= link_to 'New Person', new_person_path, class:"btn btn-primary", data: { bs_toggle: 'modal', bs_target: '#NewPersonModal', remote: true} %></td>
       </tr>
 </div>
 <br>
 
+
+<!-- Modal -->
+<div class="modal fade" id="NewPersonModal" tabindex="-1" aria-labelledby="NewPersonModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="NewPersonModalLabel">Create New Person</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div id="NewPersonForm">
+      </div>
+    </div>
+  </div>
+</div>
