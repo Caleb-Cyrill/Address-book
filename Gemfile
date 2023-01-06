@@ -46,3 +46,5 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem "country_select", "~> 8.0" 
 
 gem "jquery-rails", "~> 4.5"
+
+gem "webpacker", "~> 5.4"
