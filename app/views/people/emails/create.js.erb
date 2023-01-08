@@ -1,0 +1,6 @@
+<% if @email.errors.any? %>
+    alert("Invalid email format");
+<% else %>
+    $("#emailsTable").append("<%= escape_javascript render( 'people/emails/email_row', email: @email) %>");
+    $(".close-modal").click();
+<% end %>

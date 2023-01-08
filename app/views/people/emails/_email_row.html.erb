@@ -1,0 +1,15 @@
+<tr id="emailRow_<%= email.id %>">
+  <td><%= email.email %></td>
+  <td><%= email.comments %></td>
+  <td>
+    <div class="dropdown">
+      <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+        Actions
+      </button>
+      <ul class="dropdown-menu">
+        <li><%= link_to 'Edit', edit_person_email_path(@person, email), class:"text-decoration-none dropdown-item", data: { bs_toggle: 'modal', bs_target: '#EditEmailModal', remote: true}%></li>
+        <li><%= link_to 'Destroy', person_email_path(@person, email), method: :delete, data: { confirm: 'Are you sure?' }, class:"text-decoration-none text-danger dropdown-item" %></li>
+      </ul>
+    </div>
+  </td>
+</tr>

@@ -1,0 +1,6 @@
+<% if @email.errors.any? %>
+    alert("Invalid email details");
+<% else %>
+    $("#emailRow_<%= @email.id %>").replaceWith("<%= escape_javascript render( 'email_row', email: @email) %>");
+    $(".close-modal").click();
+<% end %>

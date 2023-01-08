@@ -1,29 +1,18 @@
-<%= form_with(model: [@person, @email]) do |form| %>
-  <% if @email.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(email.errors.count, "error") %> prohibited this email from being saved:</h2>
-
-      <ul>
-        <% email.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
+<%= form_with(model: [@person, @email], local: false) do |form| %>
+  <div class="modal-body">
+    <div class="field form-group">
+      </br>
+      <%= form.text_field :email, class:"form-control", placeholder:"Email" %>
     </div>
-  <% end %>
 
-  <div class="field form-group">
+    <div class="field">
     </br>
-    <%= form.text_field :email, class:"form-control", placeholder:"Email" %>
+      <%= form.text_area :comments, class:"form-control", placeholder:"comments" %>
+    </div>
   </div>
 
-  <div class="field">
-  </br>
-    <%= form.text_area :comments, class:"form-control", placeholder:"comments" %>
-  </div>
-
-  <div class="actions">
-  </br>
-    <%= form.submit class:"btn btn-outline-success" %>
-    <%= link_to 'Back To Emails', person_emails_path, class:"btn btn-primary" %>
+  <div class="modal-footer">
+      <button type="button" class="btn btn-secondary close-modal" data-bs-dismiss="modal">Close</button>
+      <%= form.submit class:"btn btn-outline-success" %>
   </div>
 <% end %>

@@ -28,7 +28,9 @@ class People::EmailsController < ApplicationController
       if @email.save
         format.html { redirect_to @person, notice: "Email was successfully created." }
         format.json { render :show, status: :created, location: @email }
+        format.js
       else
+        format.js
         format.html { redirect_to new_person_email_path([@person, @email]), status: :unprocessable_entity, alert: "Invalid email format" }
         format.json { render json: @email.errors, status: :unprocessable_entity }
       end
@@ -39,9 +41,11 @@ class People::EmailsController < ApplicationController
   def update
     respond_to do |format|
       if @email.update(email_params)
+        format.js
         format.html { redirect_to @person, notice: "Email was successfully updated." }
         format.json { render :show, status: :ok, location: @person }
       else
+        format.js
         format.html { redirect_to person_email_path, status: :unprocessable_entity, alert: "Invalid email format" }
         format.json { render json: @email.errors, status: :unprocessable_entity }
       end
