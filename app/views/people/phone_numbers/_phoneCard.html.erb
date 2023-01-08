@@ -8,28 +8,16 @@
             <th colspan="1"></th>
           </tr>
         </thead>
-        <tbody>
+        <tbody id="phoneTable">
           <% @phone_number.each do |phone_number| %>
-          <tr>
-            <td><%= phone_number.phone_number %></td>
-            <td><%= phone_number.comments %></td>
-            <td>
-              <div class="dropdown">
-                <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  Actions
-                </button>
-                <ul class="dropdown-menu">
-                  <li><%= link_to 'Edit', edit_person_phone_number_path(@person, phone_number), class:"text-decoration-none dropdown-item"%></li>
-                  <li><%= link_to 'Destroy', person_phone_number_path(@person, phone_number), method: :delete, data: { confirm: 'Are you sure?' }, class:"text-decoration-none text-danger dropdown-item" %></li>
-                </ul>
-              </div>
-            </td>
-          </tr>
+            <%= render "people/phone_numbers/phone_row", phone_number: phone_number %>
           <% end %>
         </tbody>
       </table>
       <tr>
-        <td><%= link_to 'Add new Phone number', new_person_phone_number_path(@person), class:"btn btn-primary", data: { bs_toggle: 'modal', bs_target: '#NewAddressModal', remote: true} %></td>
+        <td><%= link_to 'Add new Phone number', new_person_phone_number_path(@person), class:"btn btn-primary", data: { bs_toggle: 'modal', bs_target: '#NewPhoneModal', remote: true} %></td>
       </tr>
     </div>
 </div>
+
+<%= render 'people/phone_numbers/phoneModal' %>

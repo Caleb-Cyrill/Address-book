@@ -26,9 +26,11 @@ class People::PhoneNumbersController < ApplicationController
 
     respond_to do |format|
       if @phone_number.save
+        format.js
         format.html { redirect_to @person, notice: "Phone number was successfully created." }
         format.json { render :show, status: :created, location: @phone_number }
       else
+        format.js
         format.html { redirect_to new_person_phone_number_path([@person, @phone_number]), status: :unprocessable_entity, alert:"Invalid number format" }
         format.json { render json: @phone_number.errors, status: :unprocessable_entity }
       end
@@ -39,9 +41,11 @@ class People::PhoneNumbersController < ApplicationController
   def update
     respond_to do |format|
       if @phone_number.update(phone_number_params)
+        format.js
         format.html { redirect_to @person, notice: "Phone number was successfully updated." }
         format.json { render :show, status: :ok, location: @phone_number }
       else
+        format.js
         format.html { redirect_to person_phone_number_path, status: :unprocessable_entity, alert:"Invalid number format" }
         format.json { render json: @phone_number.errors, status: :unprocessable_entity }
       end

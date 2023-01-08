@@ -1,0 +1,6 @@
+<% if @phone_number.errors.any? %>
+    alert('Invalid phone number details');
+<% else %>
+    $("#phoneTable").append("<%= escape_javascript render( 'phone_row', phone_number: @phone_number) %>");
+    $(".close-modal").click();
+<% end %>
