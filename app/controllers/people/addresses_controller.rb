@@ -28,7 +28,9 @@ class People::AddressesController < ApplicationController
       if @address.save
         format.html { redirect_to @person, notice: "Address was successfully created." }
         format.json { render :show, status: :created, location: @address }
+        format.js
       else
+        format.js
         format.html { redirect_to new_person_address_path([@person, @address]), status: :unprocessable_entity, alert:"Invalid address format" }
         format.json { render json: @address.errors, status: :unprocessable_entity }
       end
@@ -39,9 +41,11 @@ class People::AddressesController < ApplicationController
   def update
     respond_to do |format|
       if @address.update(address_params)
+        format.js
         format.html { redirect_to @person, notice: "Address was successfully updated." }
         format.json { render :show, status: :ok, location: @address }
       else
+        format.js
         format.html { redirect_to person_address_path, status: :unprocessable_entity, alert:"Invalid address" }
         format.json { render json: @address.errors, status: :unprocessable_entity }
       end

@@ -1,0 +1,6 @@
+<% if @address.errors.any? %>
+    alert("Invalid Address");
+<% else %>
+    $("#addressTable").append("<%= escape_javascript render( 'people/addresses/address_row', address: @address) %>");
+    $(".close-modal").click();
+<% end %>

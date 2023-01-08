@@ -1,43 +1,31 @@
 <%= form_with(model:[@person, address] ) do |form| %>
-  <% if address.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(address.errors.count, "error") %> prohibited this address from being saved:</h2>
-
-      <ul>
-        <% address.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
+ <div class="modal-body">
+    <div class="field form-group">
+      <%= form.text_field :street, class:"form-control", placeholder:"Street" %>
     </div>
-  <% end %>
 
-  <div class="field form-group">
-    <%= form.text_field :street, class:"form-control", placeholder:"Street" %>
+    <div class="field form-group">
+      </br>
+      <%= form.text_field :town, class:"form-control", placeholder:"City/Town" %>
+    </div>
+
+    <div class="field form-group">
+      </br>
+      <%= form.text_field :zip_code, class:"form-control", placeholder:"Zip code" %>
+    </div>
+
+    <div class="field">
+      </br>
+      <%= form.text_field :state, class:"form-control", placeholder:"State" %>
+    </div>
+
+    <div class="field form-group">
+      </br>
+      <%= form.country_select :country, {}, {class:"form-select"} %>
+    </div>
   </div>
-
-  <div class="field form-group">
-  </br>
-    <%= form.text_field :town, class:"form-control", placeholder:"City/Town" %>
-  </div>
-
-  <div class="field form-group">
-    </br>
-    <%= form.text_field :zip_code, class:"form-control", placeholder:"Zip code" %>
-  </div>
-
-  <div class="field">
-    </br>
-    <%= form.text_field :state, class:"form-control", placeholder:"State" %>
-  </div>
-
-  <div class="field form-group">
-    </br>
-    <%= form.country_select :country, {}, {class:"form-select"} %>
-  </div>
-
-  <div class="actions">
-  </br>
-    <%= form.submit class:"btn btn-outline-success" %>
-    <%= link_to 'Back to Addresses',person_addresses_path, class:"btn btn-primary" %>
+  <div class="modal-footer">
+      <button type="button" class="btn btn-secondary close-modal" data-bs-dismiss="modal">Close</button>
+      <%= form.submit class:"btn btn-outline-success" %>
   </div>
 <% end %>

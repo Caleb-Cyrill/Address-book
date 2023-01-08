@@ -13,9 +13,9 @@
       </button>
       <ul class="dropdown-menu">
         <li><%= link_to 'Show', person, class:"text-decoration-none dropdown-item"%></li>
-        <li><%= link_to 'Edit', edit_person_path(person), class:"text-decoration-none dropdown-item" %></li>
+        <li><%= link_to 'Edit', edit_person_path(person), class:"text-decoration-none dropdown-item", data: { bs_toggle: 'modal', bs_target: '#EditPersonModal', remote: true} %></li>
         <li><%= link_to 'Destroy', person, method: :delete, data: { confirm: 'Are you sure?' }, class:"text-decoration-none text-danger dropdown-item" %></li>
       </ul>
     </div>
   </td>
-</tr>
+</tr> 

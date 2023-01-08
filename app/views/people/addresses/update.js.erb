@@ -1,0 +1,6 @@
+<% if @address.errors.any? %>
+    alert("Invalid details");
+<% else %>
+    $("#addressRow_<%= @address.id %>").replaceWith("<%= escape_javascript render( 'address_row', address: @address) %>");
+    $(".close-modal").click();
+<% end %>

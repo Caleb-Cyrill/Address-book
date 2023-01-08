@@ -1,5 +1,5 @@
 <% if @person.errors.any? %>
-    alert(@person.errors.full_message);
+    alert(@person.errors.count);
 <% else %>
     $("#peopleTable").append("<%= escape_javascript render( 'person_row', person: @person) %>");
     $(".close-modal").click();
