@@ -13,7 +13,9 @@
 
   <tbody id="peopleTable">
     <% @people.each do |person| %>
-      <%= render 'person_row', person: person %>
+      <% if person.user_id == Current.user.id %>
+        <%= render 'person_row', person: person %>
+      <% end%>
     <% end %>
   </tbody>
 </table>

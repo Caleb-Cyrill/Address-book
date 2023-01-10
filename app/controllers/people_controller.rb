@@ -1,6 +1,7 @@
 class PeopleController < ApplicationController
   before_action :set_person, only: %i[ show edit update destroy ]
   before_action :require_user_logged_in!
+  before_action :current_person, only: %i[ show edit update destroy ]
   # GET /people or /people.json
   def index
     @people = Person.all
@@ -70,6 +71,12 @@ class PeopleController < ApplicationController
       @person = Person.find(params[:id])
     end
 
+    def current_person 
+        if Current.user.id != @person.user_id
+          redirect_to people_path, alert: 'You do not have permission to view or edit this person'
+        end
+    end
+    
     # Only allow a list of trusted parameters through.
     def person_params
       params.require(:person).permit(:salutations, :first_name, :middle_name, :last_name, :ssn, :birth_date, :comment, :user_id)

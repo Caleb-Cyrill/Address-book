@@ -48,3 +48,11 @@ gem "country_select", "~> 8.0"
 gem "jquery-rails", "~> 4.5"
 
 gem "webpacker", "~> 5.4"
+
+gem "grape", "~> 1.7"
+
+gem "rack-cors", "~> 1.1"
+
+gem "grape-active_model_serializers", "~> 1.5"
+
+gem "grape-path-helpers", "~> 1.7"

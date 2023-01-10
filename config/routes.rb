@@ -4,10 +4,11 @@ Rails.application.routes.draw do
     resources :addresses, module: :people
     resources :phone_numbers, module: :people
   end
-    
+  
+  mount API::Base, at: "/"
   root 'home#index'
-  get 'sign_up', to: 'registrations#new'
-  post 'sign_up', to: 'registrations#create'
+  get 'users/new', to: 'users#new'
+  post 'users/new', to: 'users#create'
   get 'sign_in', to: 'sessions#new'
   post 'sign_in', to: 'sessions#create', as: 'log_in'
   delete 'logout', to: 'sessions#destroy'

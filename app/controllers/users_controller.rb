@@ -1,6 +1,8 @@
-class RegistrationsController < ApplicationController
+class UsersController < ApplicationController
   # instantiates new user
   before_action :set_user, only: %i[ destroy ]
+  protect_from_forgery with: :null_session
+  
   def new
     @user = User.new
   end
