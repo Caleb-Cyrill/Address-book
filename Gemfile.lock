@@ -268,6 +268,7 @@ PLATFORMS
   x64-mingw32
 
 DEPENDENCIES
+  activesupport (~> 6.1)
   bcrypt (~> 3.1.7)
   bootsnap (>= 1.4.2)
   byebug

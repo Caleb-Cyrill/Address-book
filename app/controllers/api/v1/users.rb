@@ -35,6 +35,18 @@ module API
                 User.find(permitted_params[:id]).destroy
                 {message: 'user successfully deleted'}
               end
+
+            desc "Edit a user"
+            params do
+              requires :email, type: String, desc: "email of user", regexp: /\A^([a-zA-Z0-9])(([\-.]|[_]+)?([a-zA-Z0-9]+))*(@){1}[a-z0-9]+[.]{1}(([a-z]{2,3})|([a-z]{2,3}[.]{1}[a-z]{2,3}))\z/
+              requires :password, type: String, desc: "password of user"
+              requires :id, type: Integer, desc: "ID of the user"
+            end
+            put "users/:id/edit" do
+              User.find(permitted_params[:id]).update(permitted_params)
+              User.find(permitted_params[:id])
+            end
+          
       end
     end
 end

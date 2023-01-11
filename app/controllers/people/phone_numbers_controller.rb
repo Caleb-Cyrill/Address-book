@@ -23,7 +23,6 @@ class People::PhoneNumbersController < ApplicationController
   # POST /phone_numbers or /phone_numbers.json
   def create
     @phone_number = @person.phone_numbers.build(phone_number_params)
-
     respond_to do |format|
       if @phone_number.save
         format.js
@@ -76,4 +75,5 @@ class People::PhoneNumbersController < ApplicationController
     def phone_number_params
       params.require(:phone_number).permit(:phone_number, :comments)
     end
+
 end
