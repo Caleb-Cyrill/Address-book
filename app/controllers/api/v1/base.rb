@@ -4,6 +4,8 @@ module API
         mount API::V1::Users
         mount API::V1::People
         mount API::V1::Addresses
+        mount API::V1::Emails
+        mount API::V1::PhoneNumbers
       end
     end
 end
