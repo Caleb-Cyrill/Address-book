@@ -37,7 +37,11 @@ module API
                     requires :user_id, type: Integer, desc: "Associated user id"
                 end
                 post "" do
-                    Person.create(declared(params))
+                    if User.exists?(id: params[:user_id])
+                        Person.create(declared(params))
+                    else
+                        {error: "User does not exist"}
+                    end
                 end
 
                 desc "Edit a person"
