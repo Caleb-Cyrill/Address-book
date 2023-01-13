@@ -5,3 +5,5 @@ class AddressTest < ActiveSupport::TestCase
   #   assert true
   # end
 end
+
+#Test address format validation

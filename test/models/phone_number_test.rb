@@ -5,3 +5,5 @@ class PhoneNumberTest < ActiveSupport::TestCase
   #   assert true
   # end
 end
+
+#Test the different formats for phone numbers
