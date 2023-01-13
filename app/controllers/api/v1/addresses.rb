@@ -16,6 +16,8 @@ module API
                             optional :country, type: String, desc: "name of the country", regexp: /^[a-zA-Z\s]*$/
                     end
                     post "/address" do
+                        current_user
+                        authenticate!
                         if Person.exists?(id: params[:person_id]) 
                             Address.create!(declared(params))
                         else
@@ -34,6 +36,7 @@ module API
                             requires :id, type: Integer, desc: "ID of address"
                     end
                     put "/address/:id" do
+                        authenticate!
                         Address.find(params[:id]).update(params)
                     end
 
@@ -42,11 +45,13 @@ module API
                         requires :id, type: Integer, desc: "ID of the person"
                     end
                     get "/address/:id" do
+                        authenticate!
                         Address.find(params[:id])
                     end
 
                     desc "Get all Addresses for person"
                     get "/address" do
+                        authenticate!
                         Address.where(person_id: params[:person_id])
                     end
 
@@ -55,6 +60,7 @@ module API
                         requires :id, type: Integer, desc: "ID of the person"
                     end
                     delete "/address/:id" do
+                        authenticate!
                         Address.find(params[:id]).destroy
                         if Address.exists?(params[:id])
                             {error: "Something went wrong try again"}

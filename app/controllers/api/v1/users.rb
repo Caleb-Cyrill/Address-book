@@ -16,6 +16,7 @@ module API
             
             desc "Get all users"
               get "users" do
+                authenticate!
                 User.all
               end
             
@@ -24,6 +25,7 @@ module API
                 requires :id, type: Integer, desc: "ID of the user"  
               end
               get "users/:id" do
+                authenticate!
                 User.find(permitted_params[:id])
               end
             
@@ -32,6 +34,7 @@ module API
                 requires :id, type: Integer, desc: "ID of the user"  
               end
               delete "users/:id" do
+                authenticate!
                 User.find(permitted_params[:id]).destroy
                 {message: 'user successfully deleted'}
               end
@@ -43,6 +46,7 @@ module API
               requires :id, type: Integer, desc: "ID of the user"
             end
             put "users/:id/edit" do
+              authenticate!
               User.find(permitted_params[:id]).update(permitted_params)
               User.find(permitted_params[:id])
             end

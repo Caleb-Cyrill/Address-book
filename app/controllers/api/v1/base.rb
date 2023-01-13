@@ -6,6 +6,7 @@ module API
         mount API::V1::Addresses
         mount API::V1::Emails
         mount API::V1::PhoneNumbers
+        mount API::V1::APIKeys
       end
     end
 end

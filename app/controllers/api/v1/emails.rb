@@ -13,6 +13,7 @@ module API
                             optional :comments, type: String, desc: "Optional comments"
                     end                            
                     post "/email" do
+                        authenticate!
                         if Person.exists?(id: params[:person_id]) 
                             Email.create!(declared(params))
                         else
@@ -26,6 +27,7 @@ module API
                         optional :comments, type: String, desc: "Optional comments"
                     end
                     put "/email/:id" do
+                        authenticate!
                         Email.find(params[:id]).update(params)
                     end
 
@@ -34,11 +36,13 @@ module API
                         requires :id, type: Integer, desc: "ID of the person"
                     end
                     get "/email/:id" do
+                        authenticate!
                         Email.find(params[:id])
                     end
 
                     desc "Get all emails for person"
                     get "/email" do
+                        authenticate!
                         Email.where(person_id: params[:person_id])
                     end
 
@@ -47,6 +51,7 @@ module API
                         requires :id, type: Integer, desc: "ID of the person"
                     end
                     delete "/email/:id" do
+                        authenticate!
                         Email.find(params[:id]).destroy
                         if Email.exists?(params[:id])
                             {error: "Something went wrong try again"}

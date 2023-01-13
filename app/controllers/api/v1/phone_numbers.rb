@@ -13,6 +13,7 @@ module API
                             optional :comments, type: String, desc: "Optional comments"
                     end                            
                     post "/phone" do
+                        authenticate!
                         if Person.exists?(id: params[:person_id]) 
                             PhoneNumber.create!(declared(params))
                         else
@@ -26,6 +27,7 @@ module API
                         optional :comments, type: String, desc: "Optional comments"
                     end
                     put "/phone/:id" do
+                        authenticate!
                         PhoneNumber.find(params[:id]).update(params)
                     end
 
@@ -34,11 +36,13 @@ module API
                         requires :id, type: Integer, desc: "ID of phone number"
                     end
                     get "/phone/:id" do
+                        authenticate!
                         PhoneNumber.find(params[:id])
                     end
 
                     desc "Get all phone numbers for person"
                     get "/phone" do
+                        authenticate!
                         PhoneNumber.where(person_id: params[:person_id])
                     end
 
@@ -47,6 +51,7 @@ module API
                         requires :id, type: Integer, desc: "ID of phone number"
                     end
                     delete "/phone/:id" do
+                        authenticate!
                         PhoneNumber.find(params[:id]).destroy
                         if PhoneNumber.exists?(params[:id])
                             {error: "Something went wrong try again"}

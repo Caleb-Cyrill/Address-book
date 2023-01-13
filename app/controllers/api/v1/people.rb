@@ -2,10 +2,13 @@ module API
     module V1
         class People < Grape::API
             include API::V1::Defaults
+            default_format :json
+            format :json
 
             resources :people do
                 desc "Return all people"
                 get "" do
+                    authenticate!
                     Person.all
                 end
 
@@ -14,6 +17,7 @@ module API
                     requires :id, type: Integer, desc: "ID of the person"  
                 end
                 get ":id" do
+                    authenticate!
                     Person.find(permitted_params[:id])
                 end
 
@@ -22,6 +26,7 @@ module API
                     requires :user_id, type: String, desc: "ID of the user"  
                   end
                 get "/users/:user_id" do
+                    authenticate!
                     Person.where(user_id: permitted_params[:user_id])
                 end
 
@@ -37,6 +42,7 @@ module API
                     requires :user_id, type: Integer, desc: "Associated user id"
                 end
                 post "" do
+                    authenticate!
                     if User.exists?(id: params[:user_id])
                         Person.create(declared(params))
                     else
@@ -56,6 +62,7 @@ module API
                     requires :user_id, type: Integer, desc: "Associated user id"
                 end
                 put "/:id" do
+                    authenticate!
                     Person.find(permitted_params[:id]).update(permitted_params)
                     {message: 'Person successfully updated'}
                 end
@@ -65,6 +72,7 @@ module API
                     requires :id, type: Integer, desc: "ID of the person"
                 end
                 delete "/:id" do
+                    authenticate!
                     Person.find(permitted_params[:id]).destroy
                     {message: "person successfully deleted"}
                 end
