@@ -1,4 +1,4 @@
-class GenerateApiKeys < ActiveRecord::Migration[6.1]
+class GenerateAPIKeys < ActiveRecord::Migration[6.1]
   def change
     create_table :api_keys do |t|
       t.integer :bearer_id, null: false

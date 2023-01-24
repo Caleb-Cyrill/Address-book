@@ -268,7 +268,6 @@ PLATFORMS
   x64-mingw32
 
 DEPENDENCIES
-  activesupport (~> 6.1)
   bcrypt (~> 3.1.7)
   bootsnap (>= 1.4.2)
   byebug
@@ -295,4 +294,4 @@ RUBY VERSION
    ruby 3.0.5p211
 
 BUNDLED WITH
-   2.2.3
+   2.4.3

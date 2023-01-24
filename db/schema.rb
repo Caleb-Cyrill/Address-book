@@ -39,7 +39,7 @@ ActiveRecord::Schema.define(version: 2023_01_12_171201) do
   end
 
   create_table "emails", force: :cascade do |t|
-    t.string "email", null: false
+    t.string "email"
     t.string "comments"
     t.string "person_id"
     t.datetime "created_at", precision: 6, null: false
@@ -62,7 +62,7 @@ ActiveRecord::Schema.define(version: 2023_01_12_171201) do
   end
 
   create_table "phone_numbers", force: :cascade do |t|
-    t.string "phone_number", null: false
+    t.integer "phonenumber"
     t.string "comments"
     t.bigint "person_id", null: false
     t.datetime "created_at", precision: 6, null: false

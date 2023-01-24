@@ -62,7 +62,7 @@ development:
 test:
   <<: *default
   database: address_book_caleb_cyrill
-  port: 5432
+  port: 
   username: postgres
   password: 12345
 

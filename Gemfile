@@ -57,4 +57,3 @@ gem "grape-active_model_serializers", "~> 1.5"
 
 gem "grape-path-helpers", "~> 1.7"
 
-gem "activesupport", "~> 6.1"
